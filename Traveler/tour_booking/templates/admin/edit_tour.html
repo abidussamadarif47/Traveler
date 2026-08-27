@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Edit Tour | Admin{% endblock %}
+{% block content %}<div class="container py-5"><div class="card shadow-sm border-0"><div class="card-body p-4"><h2 class="mb-4">Edit Tour</h2><form method="POST"><div class="row g-3">
+<div class="col-md-6"><label class="form-label">Destination</label><select class="form-select" name="destination_id" required>{% for d in destinations %}<option value="{{ d.id }}" {% if d.id == tour.destination_id %}selected{% endif %}>{{ d.name }}</option>{% endfor %}</select></div>
+<div class="col-md-6"><label class="form-label">Title</label><input class="form-control" name="title" value="{{ tour.title }}" required></div>
+<div class="col-12"><label class="form-label">Short Description</label><input class="form-control" name="short_description" value="{{ tour.short_description or '' }}"></div>
+<div class="col-12"><label class="form-label">Description</label><textarea class="form-control" name="description" rows="4">{{ tour.description or '' }}</textarea></div>
+<div class="col-md-6"><label class="form-label">Departure Location</label><input class="form-control" name="departure_location" value="{{ tour.departure_location or '' }}"></div>
+<div class="col-md-3"><label class="form-label">Departure Date</label><input type="date" class="form-control" name="departure_date" value="{{ tour.departure_date.strftime('%Y-%m-%d') }}" required></div>
+<div class="col-md-3"><label class="form-label">Departure Time</label><input type="time" class="form-control" name="departure_time" value="{{ tour.departure_time.strftime('%H:%M') if tour.departure_time else '' }}"></div>
+<div class="col-md-3"><label class="form-label">Return Date</label><input type="date" class="form-control" name="return_date" value="{{ tour.return_date.strftime('%Y-%m-%d') if tour.return_date else '' }}"></div>
+<div class="col-md-3"><label class="form-label">Return Time</label><input type="time" class="form-control" name="return_time" value="{{ tour.return_time.strftime('%H:%M') if tour.return_time else '' }}"></div>
+<div class="col-md-3"><label class="form-label">Duration</label><input class="form-control" name="duration" value="{{ tour.duration or '' }}"></div>
+<div class="col-md-3"><label class="form-label">Price</label><input type="number" step="0.01" min="0" class="form-control" name="price" value="{{ tour.price }}" required></div>
+<div class="col-md-3"><label class="form-label">Total Seats</label><input type="number" min="0" class="form-control" name="total_seats" value="{{ tour.total_seats }}" required></div>
+<div class="col-md-3"><label class="form-label">Status</label><select class="form-select" name="status">{% for s in ['upcoming','ongoing','completed','cancelled'] %}<option value="{{ s }}" {% if tour.status == s %}selected{% endif %}>{{ s|title }}</option>{% endfor %}</select></div>
+<div class="col-12"><label class="form-label">Cover Image URL</label><input class="form-control" name="cover_image" value="{{ tour.cover_image or '' }}"></div>
+{% for field, label, value in [('transport_details','Transport Details',tour.transport_details),('hotel_details','Hotel Details',tour.hotel_details),('food_details','Food Details',tour.food_details),('included_services','Included Services',tour.included_services),('excluded_services','Excluded Services',tour.excluded_services),('itinerary','Itinerary',tour.itinerary),('rules','Rules',tour.rules),('cancellation_policy','Cancellation Policy',tour.cancellation_policy)] %}<div class="col-md-6"><label class="form-label">{{ label }}</label><textarea class="form-control" name="{{ field }}" rows="3">{{ value or '' }}</textarea></div>{% endfor %}
+</div><div class="mt-4"><button class="btn btn-primary">Save Changes</button> <a href="{{ url_for('admin.tours') }}" class="btn btn-outline-secondary">Cancel</a></div></form></div></div></div>{% endblock %}

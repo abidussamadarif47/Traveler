@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Home | Tour Booking{% endblock %}
+{% block content %}
+<section class="hero-section py-5">
+    <div class="container py-5 text-center">
+        <span class="badge text-bg-light mb-3">Your next adventure starts here</span>
+        <h1 class="display-4 fw-bold">Find & Book Amazing Tour Groups</h1>
+        <p class="lead mx-auto hero-copy">See cost, dates, transport, hotel, food, itinerary and available seats before you book.</p>
+        <a href="{{ url_for('tour.list_tours') }}" class="btn btn-light btn-lg mt-2">Explore Tours</a>
+    </div>
+</section>
+
+<section class="container py-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div><h2 class="mb-1">Upcoming Tours</h2><p class="text-muted mb-0">Choose from the latest tour groups.</p></div>
+        <a href="{{ url_for('tour.list_tours') }}" class="btn btn-outline-primary">View All</a>
+    </div>
+    <div class="row g-4">
+        {% for tour in tours %}
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 tour-card shadow-sm border-0">
+                    {% if tour.cover_image %}<img src="{{ tour.cover_image }}" class="card-img-top tour-image" alt="{{ tour.title }}">{% else %}<div class="tour-placeholder">{{ tour.destination.name }}</div>{% endif %}
+                    <div class="card-body">
+                        <div class="small text-muted mb-2">{{ tour.destination.name }}</div>
+                        <h5 class="card-title">{{ tour.title }}</h5>
+                        <p class="card-text text-muted">{{ tour.short_description or 'View full details for this tour package.' }}</p>
+                        <div class="d-flex justify-content-between"><strong>৳{{ '%.2f'|format(tour.price) }}</strong><span>{{ tour.available_seats }} seats left</span></div>
+                    </div>
+                    <div class="card-footer bg-white border-0 pb-3"><a href="{{ url_for('tour.details', tour_id=tour.id) }}" class="btn btn-primary w-100">View Details</a></div>
+                </div>
+            </div>
+        {% else %}
+            <div class="col-12"><div class="alert alert-info">No upcoming tours have been added yet. Admin can add one from the Admin Panel.</div></div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

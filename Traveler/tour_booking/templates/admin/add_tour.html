@@ -1,0 +1,428 @@
+{% extends "base.html" %}
+
+{% block title %}
+Add Tour | Admin
+{% endblock %}
+
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="card shadow-sm">
+
+        <div class="card-body p-4">
+
+            <h2 class="mb-4">
+                Add New Tour
+            </h2>
+
+
+            <form method="POST">
+
+
+                <div class="row">
+
+
+                    <div class="col-md-6 mb-3">
+
+                        <label class="form-label">
+                            Destination
+                        </label>
+
+                        <select
+                            name="destination_id"
+                            class="form-select"
+                            required
+                        >
+
+                            <option value="">
+                                Select Destination
+                            </option>
+
+                            {% for destination in destinations %}
+
+                                <option value="{{ destination.id }}">
+
+                                    {{ destination.name }}
+
+                                </option>
+
+                            {% endfor %}
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="col-md-6 mb-3">
+
+                        <label class="form-label">
+                            Tour Title
+                        </label>
+
+                        <input
+                            type="text"
+                            name="title"
+                            class="form-control"
+                            placeholder="Sajek Valley Adventure"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="col-md-12 mb-3">
+
+                        <label class="form-label">
+                            Short Description
+                        </label>
+
+                        <input
+                            type="text"
+                            name="short_description"
+                            class="form-control"
+                        >
+
+                    </div>
+
+
+                    <div class="col-md-12 mb-3">
+
+                        <label class="form-label">
+                            Full Description
+                        </label>
+
+                        <textarea
+                            name="description"
+                            class="form-control"
+                            rows="4"
+                        ></textarea>
+
+                    </div>
+
+
+                    <div class="col-md-6 mb-3">
+
+                        <label class="form-label">
+                            Departure Location
+                        </label>
+
+                        <input
+                            type="text"
+                            name="departure_location"
+                            class="form-control"
+                            placeholder="Dhaka"
+                        >
+
+                    </div>
+
+
+                    <div class="col-md-3 mb-3">
+
+                        <label class="form-label">
+                            Departure Date
+                        </label>
+
+                        <input
+                            type="date"
+                            name="departure_date"
+                            class="form-control"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="col-md-3 mb-3">
+
+                        <label class="form-label">
+                            Departure Time
+                        </label>
+
+                        <input
+                            type="time"
+                            name="departure_time"
+                            class="form-control"
+                        >
+
+                    </div>
+
+
+                    <div class="col-md-3 mb-3">
+
+                        <label class="form-label">
+                            Return Date
+                        </label>
+
+                        <input
+                            type="date"
+                            name="return_date"
+                            class="form-control"
+                        >
+
+                    </div>
+
+
+                    <div class="col-md-3 mb-3">
+
+                        <label class="form-label">
+                            Return Time
+                        </label>
+
+                        <input
+                            type="time"
+                            name="return_time"
+                            class="form-control"
+                        >
+
+                    </div>
+
+
+                    <div class="col-md-3 mb-3">
+
+                        <label class="form-label">
+                            Duration
+                        </label>
+
+                        <input
+                            type="text"
+                            name="duration"
+                            class="form-control"
+                            placeholder="3 Days / 2 Nights"
+                        >
+
+                    </div>
+
+
+                    <div class="col-md-3 mb-3">
+
+                        <label class="form-label">
+                            Price (৳)
+                        </label>
+
+                        <input
+                            type="number"
+                            step="0.01"
+                            min="0"
+                            name="price"
+                            class="form-control"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="col-md-3 mb-3">
+
+                        <label class="form-label">
+                            Total Seats
+                        </label>
+
+                        <input
+                            type="number"
+                            min="0"
+                            name="total_seats"
+                            class="form-control"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="col-md-3 mb-3">
+
+                        <label class="form-label">
+                            Status
+                        </label>
+
+                        <select
+                            name="status"
+                            class="form-select"
+                        >
+
+                            <option value="upcoming">
+                                Upcoming
+                            </option>
+
+                            <option value="ongoing">
+                                Ongoing
+                            </option>
+
+                            <option value="completed">
+                                Completed
+                            </option>
+
+                            <option value="cancelled">
+                                Cancelled
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="col-md-12 mb-3">
+
+                        <label class="form-label">
+                            Cover Image URL
+                        </label>
+
+                        <input
+                            type="text"
+                            name="cover_image"
+                            class="form-control"
+                            placeholder="https://..."
+                        >
+
+                    </div>
+
+
+                    <div class="col-md-6 mb-3">
+
+                        <label class="form-label">
+                            Transport Details
+                        </label>
+
+                        <textarea
+                            name="transport_details"
+                            class="form-control"
+                            rows="3"
+                        ></textarea>
+
+                    </div>
+
+
+                    <div class="col-md-6 mb-3">
+
+                        <label class="form-label">
+                            Hotel Details
+                        </label>
+
+                        <textarea
+                            name="hotel_details"
+                            class="form-control"
+                            rows="3"
+                        ></textarea>
+
+                    </div>
+
+
+                    <div class="col-md-6 mb-3">
+
+                        <label class="form-label">
+                            Food Details
+                        </label>
+
+                        <textarea
+                            name="food_details"
+                            class="form-control"
+                            rows="3"
+                        ></textarea>
+
+                    </div>
+
+
+                    <div class="col-md-6 mb-3">
+
+                        <label class="form-label">
+                            Included Services
+                        </label>
+
+                        <textarea
+                            name="included_services"
+                            class="form-control"
+                            rows="3"
+                        ></textarea>
+
+                    </div>
+
+
+                    <div class="col-md-6 mb-3">
+
+                        <label class="form-label">
+                            Excluded Services
+                        </label>
+
+                        <textarea
+                            name="excluded_services"
+                            class="form-control"
+                            rows="3"
+                        ></textarea>
+
+                    </div>
+
+
+                    <div class="col-md-6 mb-3">
+
+                        <label class="form-label">
+                            Rules
+                        </label>
+
+                        <textarea
+                            name="rules"
+                            class="form-control"
+                            rows="3"
+                        ></textarea>
+
+                    </div>
+
+
+                    <div class="col-md-12 mb-3">
+
+                        <label class="form-label">
+                            Tour Itinerary
+                        </label>
+
+                        <textarea
+                            name="itinerary"
+                            class="form-control"
+                            rows="6"
+                            placeholder="Day 1: ...&#10;Day 2: ...&#10;Day 3: ..."
+                        ></textarea>
+
+                    </div>
+
+
+                    <div class="col-md-12 mb-4">
+
+                        <label class="form-label">
+                            Cancellation Policy
+                        </label>
+
+                        <textarea
+                            name="cancellation_policy"
+                            class="form-control"
+                            rows="3"
+                        ></textarea>
+
+                    </div>
+
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="btn btn-primary"
+                >
+                    Save Tour
+                </button>
+
+
+                <a
+                    href="{{ url_for('admin.tours') }}"
+                    class="btn btn-secondary"
+                >
+                    Cancel
+                </a>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
